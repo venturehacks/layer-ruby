@@ -1,17 +1,15 @@
 module Layer
   module Operations
-    module Create
+    module Paginate
 
       module ClassMethods
-        # Creates the resource with the given attributes
+        # Finds all resources from a paginated endpoint
         #
-        # @param attributes [Hash] the resource's attributes
         # @param client [Layer::Client] the client to use to make this request
-        # @return [Layer::Resource] the created resource
+        # @return [Layer::ResourceCollection] the found resources
         # @raise [Layer::Exceptions::Exception] a subclass of Layer::Exceptions::Exception describing the error
-        def create(attributes = {}, client = self.client)
-          response = client.post(url, attributes)
-          from_response(response, client)
+        def all(client = self.client)
+          Layer::ResourceCollection.new(self, client)
         end
       end
 

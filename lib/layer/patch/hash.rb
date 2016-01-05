@@ -9,8 +9,8 @@ module Layer
       end
 
       def []=(key, value)
-        patch.set(key, value)
-        super
+        patch.set(key, value.dup)
+        super(key, wrap(key, value))
       end
       alias :store :[]=
 
